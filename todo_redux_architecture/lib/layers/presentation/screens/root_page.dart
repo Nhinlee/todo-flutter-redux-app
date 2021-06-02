@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo_redux_architecture/presentation/screens/all_todo_screen.dart';
-import 'package:todo_redux_architecture/presentation/screens/complete_todo_screen.dart';
-import 'package:todo_redux_architecture/presentation/screens/uncomplete_todo_screen.dart';
-import 'package:todo_redux_architecture/presentation/theme.dart';
+import 'package:todo_redux_architecture/layers/presentation/screens/all_todo_screen.dart';
+import 'package:todo_redux_architecture/layers/presentation/screens/complete_todo_screen.dart';
+import 'package:todo_redux_architecture/layers/presentation/screens/uncomplete_todo_screen.dart';
+import 'package:todo_redux_architecture/layers/presentation/theme.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
