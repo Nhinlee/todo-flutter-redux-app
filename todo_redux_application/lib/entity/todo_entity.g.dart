@@ -8,26 +8,24 @@ part of 'todo_entity.dart';
 
 class _$TodoEntity extends TodoEntity {
   @override
-  final String id;
+  final int id;
   @override
   final String title;
-  @override
-  final DateTime createTime;
   @override
   final bool isCompleted;
   @override
   final String desc;
+  @override
+  final bool isFavorite;
 
   factory _$TodoEntity([void Function(TodoEntityBuilder) updates]) =>
       (new TodoEntityBuilder()..update(updates)).build();
 
   _$TodoEntity._(
-      {this.id, this.title, this.createTime, this.isCompleted, this.desc})
+      {this.id, this.title, this.isCompleted, this.desc, this.isFavorite})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'TodoEntity', 'id');
     BuiltValueNullFieldError.checkNotNull(title, 'TodoEntity', 'title');
-    BuiltValueNullFieldError.checkNotNull(
-        createTime, 'TodoEntity', 'createTime');
     BuiltValueNullFieldError.checkNotNull(
         isCompleted, 'TodoEntity', 'isCompleted');
   }
@@ -45,17 +43,17 @@ class _$TodoEntity extends TodoEntity {
     return other is TodoEntity &&
         id == other.id &&
         title == other.title &&
-        createTime == other.createTime &&
         isCompleted == other.isCompleted &&
-        desc == other.desc;
+        desc == other.desc &&
+        isFavorite == other.isFavorite;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, id.hashCode), title.hashCode), createTime.hashCode),
-            isCompleted.hashCode),
-        desc.hashCode));
+        $jc($jc($jc($jc(0, id.hashCode), title.hashCode), isCompleted.hashCode),
+            desc.hashCode),
+        isFavorite.hashCode));
   }
 
   @override
@@ -63,9 +61,9 @@ class _$TodoEntity extends TodoEntity {
     return (newBuiltValueToStringHelper('TodoEntity')
           ..add('id', id)
           ..add('title', title)
-          ..add('createTime', createTime)
           ..add('isCompleted', isCompleted)
-          ..add('desc', desc))
+          ..add('desc', desc)
+          ..add('isFavorite', isFavorite))
         .toString();
   }
 }
@@ -73,17 +71,13 @@ class _$TodoEntity extends TodoEntity {
 class TodoEntityBuilder implements Builder<TodoEntity, TodoEntityBuilder> {
   _$TodoEntity _$v;
 
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
+  int _id;
+  int get id => _$this._id;
+  set id(int id) => _$this._id = id;
 
   String _title;
   String get title => _$this._title;
   set title(String title) => _$this._title = title;
-
-  DateTime _createTime;
-  DateTime get createTime => _$this._createTime;
-  set createTime(DateTime createTime) => _$this._createTime = createTime;
 
   bool _isCompleted;
   bool get isCompleted => _$this._isCompleted;
@@ -93,6 +87,10 @@ class TodoEntityBuilder implements Builder<TodoEntity, TodoEntityBuilder> {
   String get desc => _$this._desc;
   set desc(String desc) => _$this._desc = desc;
 
+  bool _isFavorite;
+  bool get isFavorite => _$this._isFavorite;
+  set isFavorite(bool isFavorite) => _$this._isFavorite = isFavorite;
+
   TodoEntityBuilder();
 
   TodoEntityBuilder get _$this {
@@ -100,9 +98,9 @@ class TodoEntityBuilder implements Builder<TodoEntity, TodoEntityBuilder> {
     if ($v != null) {
       _id = $v.id;
       _title = $v.title;
-      _createTime = $v.createTime;
       _isCompleted = $v.isCompleted;
       _desc = $v.desc;
+      _isFavorite = $v.isFavorite;
       _$v = null;
     }
     return this;
@@ -126,11 +124,10 @@ class TodoEntityBuilder implements Builder<TodoEntity, TodoEntityBuilder> {
             id: BuiltValueNullFieldError.checkNotNull(id, 'TodoEntity', 'id'),
             title: BuiltValueNullFieldError.checkNotNull(
                 title, 'TodoEntity', 'title'),
-            createTime: BuiltValueNullFieldError.checkNotNull(
-                createTime, 'TodoEntity', 'createTime'),
             isCompleted: BuiltValueNullFieldError.checkNotNull(
                 isCompleted, 'TodoEntity', 'isCompleted'),
-            desc: desc);
+            desc: desc,
+            isFavorite: isFavorite);
     replace(_$result);
     return _$result;
   }

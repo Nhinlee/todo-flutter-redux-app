@@ -8,7 +8,6 @@ import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
 import 'package:todo_redux_application/layers/domain/state/app_state.dart';
 import 'package:todo_redux_application/layers/presentation/widgets/title_text_widget.dart';
 import 'package:todo_redux_application/layers/presentation/widgets/todo_list_widget.dart';
-import 'package:todo_redux_application/mock_data/mock_todo_list.dart';
 
 class AllTodoScreen extends StatelessWidget {
   const AllTodoScreen({Key key}) : super(key: key);

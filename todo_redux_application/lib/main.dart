@@ -3,11 +3,19 @@ import 'package:redux/redux.dart';
 import 'package:todo_redux_application/app.dart';
 import 'package:todo_redux_application/layers/domain/middleware/todos_middleware.dart';
 import 'package:todo_redux_application/layers/domain/reducer/app_reducer.dart';
-import 'package:todo_redux_application/layers/domain/repository/todo_repository.dart';
+import 'package:todo_redux_application/layers/data/repository/todo_repository.dart';
+import 'injection_container.dart' as di;
 
 import 'layers/domain/state/app_state.dart';
 
-void main() {
+void main() async {
+  // Widget Binding
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Injection dependency
+  await di.init();
+
+  // Run app
   runApp(MyApp());
 }
 
@@ -18,11 +26,10 @@ class MyApp extends StatelessWidget {
     return ReduxApp(
       store: Store<AppState>(
         appReducer,
-        // TODO: Refactor this code -> instantiate in another (injection container ??)
         initialState: new AppState((state) => state
           ..todoList = []
           ..isLoading = false),
-        middleware: createStoreTodosMiddleware(TodoRepository()),
+        middleware: createStoreTodosMiddleware(di.sl<TodoRepository>()),
       ),
     );
   }
