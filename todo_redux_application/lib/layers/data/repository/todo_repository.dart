@@ -14,4 +14,8 @@ class TodoRepository {
   Future<void> addNewTodo(TodoEntity todo) async {
     await localDataSource.addNewTodo(todo);
   }
+
+  Future<void> updateTodo(TodoEntity todo) async {
+    await localDataSource.updateTodo(todo);
+  }
 }

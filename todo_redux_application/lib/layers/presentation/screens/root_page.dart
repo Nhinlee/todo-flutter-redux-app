@@ -37,6 +37,7 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+      initialIndex: 0,
       length: 3,
       child: Scaffold(
         appBar: MyAppBar(

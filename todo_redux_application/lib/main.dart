@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:todo_redux_application/app.dart';
@@ -24,13 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReduxApp(
-      store: Store<AppState>(
-        appReducer,
-        initialState: new AppState((state) => state
-          ..todoList = []
-          ..isLoading = false),
-        middleware: createStoreTodosMiddleware(di.sl<TodoRepository>()),
-      ),
+      store: di.sl<Store<AppState>>(),
     );
   }
 }

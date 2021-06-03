@@ -6,7 +6,8 @@ import 'package:todo_redux_application/core/sqlite/table_helper.dart';
 part 'todo_entity.g.dart';
 
 abstract class TodoEntity implements Built<TodoEntity, TodoEntityBuilder> {
-  static int nextId = 0;
+  // This stand for config new id when add new to-do later
+  static int currentMaxId = 0;
 
   int get id;
 

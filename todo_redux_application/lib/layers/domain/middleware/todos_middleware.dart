@@ -13,6 +13,7 @@ List<Middleware<AppState>> createStoreTodosMiddleware(TodoRepository repos) {
   return [
     TypedMiddleware<AppState, LoadTodosAction>(loadTodo),
     TypedMiddleware<AppState, AddNewTodoAction>(saveTodo),
+    TypedMiddleware<AppState, UpdateTodoAction>(saveTodo),
   ];
 }
 
@@ -42,6 +43,15 @@ Middleware<AppState> _saveTodoMiddleware(TodoRepository repository) {
         store.dispatch(AddNewTodoFailedAction(
           todo: action.todo,
         ));
+      }
+    }
+
+    if (action is UpdateTodoAction) {
+      try {
+        await repository.updateTodo(action.todo);
+        store.dispatch(UpdateTodoSuccessAction());
+      } catch (e)  {
+        store.dispatch(UpdateTodoFailedAction());
       }
     }
   };

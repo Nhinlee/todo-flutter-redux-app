@@ -13,7 +13,7 @@ class LoadTodosSuccessAction {
 }
 
 
-// Edit To-do Action
+// Add New To-do Action
 
 class AddNewTodoAction {
   final TodoEntity todo;
@@ -28,3 +28,15 @@ class AddNewTodoFailedAction {
 }
 
 class AddNewTodoSuccessAction {}
+
+// Update To-do Action
+
+class UpdateTodoAction {
+  final TodoEntity todo;
+
+  UpdateTodoAction({@required this.todo});
+}
+
+class UpdateTodoSuccessAction {}
+
+class UpdateTodoFailedAction {}

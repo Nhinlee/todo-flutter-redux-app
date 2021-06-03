@@ -1,4 +1,5 @@
-import 'dart:developer';
+import 'dart:developer' as dev;
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:todo_redux_application/core/sqlite/sqlite_helper.dart';
@@ -14,11 +15,16 @@ class TodoLocalDataSource {
     try {
       final rows = await sqLiteHelper.getAll(TodoTableHelper.tableName);
       return rows.length > 0
-          ? rows.map((row) => TodoEntity.fromMap(row)).toList()
+          ? rows.map((row) {
+              final newTodo = TodoEntity.fromMap(row);
+              TodoEntity.currentMaxId =
+                  max(TodoEntity.currentMaxId, newTodo.id);
+              return newTodo;
+            }).toList()
           : [];
     } catch (e) {
-      log(e.toString());
-      return Future.error(e);
+      dev.log(e.toString());
+      throw e;
     }
   }
 
@@ -26,8 +32,22 @@ class TodoLocalDataSource {
     try {
       await sqLiteHelper.insert(TodoTableHelper.tableName, row: todo.toMap());
     } catch (e) {
-      log(e.toString());
-      return Future.error(e);
+      dev.log(e.toString());
+      throw e;
+    }
+  }
+
+  Future<void> updateTodo(TodoEntity todo) async {
+    try {
+      await sqLiteHelper.update(
+        TodoTableHelper.tableName,
+        row: todo.toMap(),
+        where: TodoTableHelper.colId,
+        whereArg: todo.id,
+      );
+    } catch (e) {
+      dev.log(e.toString());
+      throw e;
     }
   }
 }
