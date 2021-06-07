@@ -12,7 +12,7 @@ void main() {
       // GIVE
       final state = TodoState.initial();
       final store = Store<TodoState>(appReducer, initialState: state);
-      final action = DoLoadTodosAction();
+      final action = DoLoadTodoAction();
 
       // WHEN
       store.dispatch(action);

@@ -27,7 +27,7 @@ void main() {
 
       test('local db don' 't have todo', () async {
         // GIVE
-        final action = DoLoadTodosAction();
+        final action = DoLoadTodoAction();
 
         // WHEN
         when(repository.getTodoList()).thenAnswer(
@@ -42,7 +42,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            SetLoadTodosSuccessAction(
+            SetLoadSuccessTodoAction(
               (updates) =>
                   updates..todoList = BuiltList<TodoEntity>([]).toBuilder(),
             ),
@@ -52,7 +52,7 @@ void main() {
 
       test('local db have todo', () async {
         // GIVE
-        final action = DoLoadTodosAction();
+        final action = DoLoadTodoAction();
         final mockTodoList = BuiltList<TodoEntity>([
           TodoEntity((updates) => updates
             ..id = 1
@@ -73,7 +73,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            SetLoadTodosSuccessAction(
+            SetLoadSuccessTodoAction(
               (updates) => updates
                 ..todoList = BuiltList<TodoEntity>(mockTodoList).toBuilder(),
             ),
@@ -109,7 +109,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            SetAddNewTodoSuccessAction(),
+            SetAddNewSuccessTodoAction(),
           ],
         );
       });
@@ -138,7 +138,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            SetAddNewTodoFailedAction(
+            SetAddNewFailedTodoAction(
                 (updates) => updates.todo = mockTodo.toBuilder()),
           ],
         );
@@ -173,7 +173,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            SetUpdateTodoSuccessAction(),
+            SetUpdateSuccessTodoAction(),
           ],
         );
       });
@@ -202,7 +202,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            SetUpdateTodoFailedAction(),
+            SetUpdateFailedTodoAction(),
           ],
         );
       });

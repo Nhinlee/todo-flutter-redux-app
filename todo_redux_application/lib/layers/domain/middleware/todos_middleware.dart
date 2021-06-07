@@ -23,52 +23,52 @@ class TodoMiddleware extends EpicClass<TodoState> {
   Stream<dynamic> loadTodosEpic(
     Stream<dynamic> actions,
     EpicStore<TodoState> store,
-  ) {
-    return actions
-        .where((action) => action is DoLoadTodosAction)
-        .asyncMap((action) async {
-      try {
-        final todos = await repository.getTodoList();
-        return SetLoadTodosSuccessAction(
-            (updates) => updates..todoList.addAll(todos));
-      } on Exception catch (e) {
-        log(e.toString());
-        return SetLoadTodosFailedAction();
+  ) async* {
+    await for (final action in actions) {
+      if (action is DoLoadTodoAction) {
+        try {
+          final todos = await repository.getTodoList();
+          yield SetLoadSuccessTodoAction(
+              (updates) => updates..todoList.addAll(todos));
+        } on Exception catch (e) {
+          log(e.toString());
+          yield SetLoadFailedTodoAction();
+        }
       }
-    });
+    }
   }
 
   Stream<dynamic> addNewTodoEpic(
     Stream<dynamic> actions,
     EpicStore<TodoState> store,
-  ) {
-    return actions
-        .where((action) => action is DoAddNewTodoAction)
-        .asyncMap((action) async {
-      try {
-        await repository.addNewTodo(action.todo);
-        return SetAddNewTodoSuccessAction();
-      } on Exception catch (e) {
-        return SetAddNewTodoFailedAction(
-          (updates) => updates.todo = action.todo.toBuilder(),
-        );
+  ) async* {
+    await for (final action in actions) {
+      if (action is DoAddNewTodoAction) {
+        try {
+          await repository.addNewTodo(action.todo);
+          yield SetAddNewSuccessTodoAction();
+        } on Exception catch (e) {
+          yield SetAddNewFailedTodoAction(
+            (updates) => updates.todo = action.todo.toBuilder(),
+          );
+        }
       }
-    });
+    }
   }
 
   Stream<dynamic> updateTodoEpic(
     Stream<dynamic> actions,
     EpicStore<TodoState> store,
-  ) {
-    return actions
-        .where((action) => action is DoUpdateTodoAction)
-        .asyncMap((action) async {
-      try {
-        await repository.updateTodo(action.todo);
-        return SetUpdateTodoSuccessAction();
-      } catch (e) {
-        return SetUpdateTodoFailedAction();
+  ) async* {
+    await for (final action in actions) {
+      if (action is DoUpdateTodoAction) {
+        try {
+          await repository.updateTodo(action.todo);
+          yield SetUpdateSuccessTodoAction();
+        } catch (e) {
+          yield SetUpdateFailedTodoAction();
+        }
       }
-    });
+    }
   }
 }

@@ -7,27 +7,27 @@ part 'todo_action.g.dart';
 abstract class TodoAction {}
 
 // Load To-do Action
-abstract class DoLoadTodosAction
-    implements TodoAction, Built<DoLoadTodosAction, DoLoadTodosActionBuilder> {
-  DoLoadTodosAction._();
+abstract class DoLoadTodoAction
+    implements TodoAction, Built<DoLoadTodoAction, DoLoadTodoActionBuilder> {
+  DoLoadTodoAction._();
 
-  factory DoLoadTodosAction([void Function(DoLoadTodosActionBuilder) updates]) =
-      _$DoLoadTodosAction;
+  factory DoLoadTodoAction([void Function(DoLoadTodoActionBuilder) updates]) =
+      _$DoLoadTodoAction;
 }
 
-class SetLoadTodosFailedAction implements TodoAction {}
+class SetLoadFailedTodoAction implements TodoAction {}
 
-abstract class SetLoadTodosSuccessAction
+abstract class SetLoadSuccessTodoAction
     implements
         TodoAction,
-        Built<SetLoadTodosSuccessAction, SetLoadTodosSuccessActionBuilder> {
+        Built<SetLoadSuccessTodoAction, SetLoadSuccessTodoActionBuilder> {
   BuiltList<TodoEntity> get todoList;
 
-  SetLoadTodosSuccessAction._();
+  SetLoadSuccessTodoAction._();
 
-  factory SetLoadTodosSuccessAction(
-          [void Function(SetLoadTodosSuccessActionBuilder) updates]) =
-      _$SetLoadTodosSuccessAction;
+  factory SetLoadSuccessTodoAction(
+          [void Function(SetLoadSuccessTodoActionBuilder) updates]) =
+      _$SetLoadSuccessTodoAction;
 }
 
 // Add New To-do Action
@@ -45,28 +45,28 @@ abstract class DoAddNewTodoAction
       _$DoAddNewTodoAction;
 }
 
-abstract class SetAddNewTodoFailedAction
+abstract class SetAddNewFailedTodoAction
     implements
         TodoAction,
-        Built<SetAddNewTodoFailedAction, SetAddNewTodoFailedActionBuilder> {
+        Built<SetAddNewFailedTodoAction, SetAddNewFailedTodoActionBuilder> {
   TodoEntity get todo;
 
-  SetAddNewTodoFailedAction._();
+  SetAddNewFailedTodoAction._();
 
-  factory SetAddNewTodoFailedAction(
-          [void Function(SetAddNewTodoFailedActionBuilder) updates]) =
-      _$SetAddNewTodoFailedAction;
+  factory SetAddNewFailedTodoAction(
+          [void Function(SetAddNewFailedTodoActionBuilder) updates]) =
+      _$SetAddNewFailedTodoAction;
 }
 
-abstract class SetAddNewTodoSuccessAction
+abstract class SetAddNewSuccessTodoAction
     implements
         TodoAction,
-        Built<SetAddNewTodoSuccessAction, SetAddNewTodoSuccessActionBuilder> {
-  SetAddNewTodoSuccessAction._();
+        Built<SetAddNewSuccessTodoAction, SetAddNewSuccessTodoActionBuilder> {
+  SetAddNewSuccessTodoAction._();
 
-  factory SetAddNewTodoSuccessAction(
-          [void Function(SetAddNewTodoSuccessActionBuilder) updates]) =
-      _$SetAddNewTodoSuccessAction;
+  factory SetAddNewSuccessTodoAction(
+          [void Function(SetAddNewSuccessTodoActionBuilder) updates]) =
+      _$SetAddNewSuccessTodoAction;
 }
 
 // Update To-do Action
@@ -84,24 +84,24 @@ abstract class DoUpdateTodoAction
       _$DoUpdateTodoAction;
 }
 
-abstract class SetUpdateTodoSuccessAction
+abstract class SetUpdateSuccessTodoAction
     implements
         TodoAction,
-        Built<SetUpdateTodoSuccessAction, SetUpdateTodoSuccessActionBuilder> {
-  SetUpdateTodoSuccessAction._();
+        Built<SetUpdateSuccessTodoAction, SetUpdateSuccessTodoActionBuilder> {
+  SetUpdateSuccessTodoAction._();
 
-  factory SetUpdateTodoSuccessAction(
-          [void Function(SetUpdateTodoSuccessActionBuilder) updates]) =
-      _$SetUpdateTodoSuccessAction;
+  factory SetUpdateSuccessTodoAction(
+          [void Function(SetUpdateSuccessTodoActionBuilder) updates]) =
+      _$SetUpdateSuccessTodoAction;
 }
 
-abstract class SetUpdateTodoFailedAction
+abstract class SetUpdateFailedTodoAction
     implements
         TodoAction,
-        Built<SetUpdateTodoFailedAction, SetUpdateTodoFailedActionBuilder> {
-  SetUpdateTodoFailedAction._();
+        Built<SetUpdateFailedTodoAction, SetUpdateFailedTodoActionBuilder> {
+  SetUpdateFailedTodoAction._();
 
-  factory SetUpdateTodoFailedAction(
-          [void Function(SetUpdateTodoFailedActionBuilder) updates]) =
-      _$SetUpdateTodoFailedAction;
+  factory SetUpdateFailedTodoAction(
+          [void Function(SetUpdateFailedTodoActionBuilder) updates]) =
+      _$SetUpdateFailedTodoAction;
 }

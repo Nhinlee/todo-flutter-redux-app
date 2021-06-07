@@ -6,21 +6,21 @@ import 'package:todo_redux_application/entity/todo_entity.dart';
 import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
 
 final todosReducer = combineReducers<BuiltList<TodoEntity>>([
-  TypedReducer<BuiltList<TodoEntity>, SetLoadTodosSuccessAction>(_setLoadedTodo),
-  TypedReducer<BuiltList<TodoEntity>, SetLoadTodosFailedAction>(_setNoTodo),
+  TypedReducer<BuiltList<TodoEntity>, SetLoadSuccessTodoAction>(_setLoadedTodo),
+  TypedReducer<BuiltList<TodoEntity>, SetLoadFailedTodoAction>(_setNoTodo),
   TypedReducer<BuiltList<TodoEntity>, DoAddNewTodoAction>(_addNewTodo),
-  TypedReducer<BuiltList<TodoEntity>, SetAddNewTodoFailedAction>(
+  TypedReducer<BuiltList<TodoEntity>, SetAddNewFailedTodoAction>(
       _addNewTodoRollback),
   TypedReducer<BuiltList<TodoEntity>, DoUpdateTodoAction>(_updateTodo),
 ]);
 
 BuiltList<TodoEntity> _setLoadedTodo(
-    BuiltList<TodoEntity> state, SetLoadTodosSuccessAction action) {
+    BuiltList<TodoEntity> state, SetLoadSuccessTodoAction action) {
   return action.todoList;
 }
 
 BuiltList<TodoEntity> _setNoTodo(
-    BuiltList<TodoEntity> state, SetLoadTodosFailedAction action) {
+    BuiltList<TodoEntity> state, SetLoadFailedTodoAction action) {
   return [].build();
 }
 
@@ -30,7 +30,7 @@ BuiltList<TodoEntity> _addNewTodo(
 }
 
 BuiltList<TodoEntity> _addNewTodoRollback(
-    BuiltList<TodoEntity> state, SetAddNewTodoFailedAction action) {
+    BuiltList<TodoEntity> state, SetAddNewFailedTodoAction action) {
   return state.rebuild((list) => list..remove(action.todo));
 }
 
