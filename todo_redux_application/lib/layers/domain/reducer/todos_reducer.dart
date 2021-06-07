@@ -1,42 +1,49 @@
 import 'dart:developer';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:redux/redux.dart';
 import 'package:todo_redux_application/entity/todo_entity.dart';
 import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
 
-final todosReducer = combineReducers<List<TodoEntity>>([
-  TypedReducer<List<TodoEntity>, LoadTodosSuccessAction>(_setLoadedTodo),
-  TypedReducer<List<TodoEntity>, LoadTodosFailedAction>(_setNoTodo),
-  TypedReducer<List<TodoEntity>, AddNewTodoAction>(_addNewTodo),
-  TypedReducer<List<TodoEntity>, AddNewTodoFailedAction>(_addNewTodoRollback),
-  TypedReducer<List<TodoEntity>, UpdateTodoAction>(_updateTodo),
+final todosReducer = combineReducers<BuiltList<TodoEntity>>([
+  TypedReducer<BuiltList<TodoEntity>, LoadTodosSuccessAction>(_setLoadedTodo),
+  TypedReducer<BuiltList<TodoEntity>, LoadTodosFailedAction>(_setNoTodo),
+  TypedReducer<BuiltList<TodoEntity>, AddNewTodoAction>(_addNewTodo),
+  TypedReducer<BuiltList<TodoEntity>, AddNewTodoFailedAction>(_addNewTodoRollback),
+  TypedReducer<BuiltList<TodoEntity>, UpdateTodoAction>(_updateTodo),
 ]);
 
-List<TodoEntity> _setLoadedTodo(
-    List<TodoEntity> state, LoadTodosSuccessAction action) {
+BuiltList<TodoEntity> _setLoadedTodo(
+    BuiltList<TodoEntity> state, LoadTodosSuccessAction action) {
   return action.todoList;
 }
 
-List<TodoEntity> _setNoTodo(
-    List<TodoEntity> state, LoadTodosFailedAction action) {
-  return [];
+BuiltList<TodoEntity> _setNoTodo(
+    BuiltList<TodoEntity> state, LoadTodosFailedAction action) {
+  return [].build();
 }
 
-List<TodoEntity> _addNewTodo(List<TodoEntity> state, AddNewTodoAction action) {
-  return state..add(action.todo);
+BuiltList<TodoEntity> _addNewTodo(
+    BuiltList<TodoEntity> state, AddNewTodoAction action) {
+  return state.rebuild((list) => list..add(action.todo));
 }
 
-List<TodoEntity> _addNewTodoRollback(
-    List<TodoEntity> state, AddNewTodoFailedAction action) {
-  return state..remove(action.todo);
+BuiltList<TodoEntity> _addNewTodoRollback(
+    BuiltList<TodoEntity> state, AddNewTodoFailedAction action) {
+  return state.rebuild((list) => list..remove(action.todo));
 }
 
-List<TodoEntity> _updateTodo(List<TodoEntity> state, UpdateTodoAction action) {
+BuiltList<TodoEntity> _updateTodo(
+    BuiltList<TodoEntity> state, UpdateTodoAction action) {
   final updateTodoIndex = state.indexWhere((todo) => todo.id == action.todo.id);
-  state[updateTodoIndex] = state[updateTodoIndex].rebuild((preTodo) => preTodo
-    ..title = action.todo.title
-    ..desc = action.todo.desc
-    ..isCompleted = action.todo.isCompleted
-    ..isFavorite = action.todo.isFavorite,);
+
+  state.rebuild((list) => list
+    ..[updateTodoIndex].rebuild(
+      (preTodo) => preTodo
+        ..title = action.todo.title
+        ..desc = action.todo.desc
+        ..isCompleted = action.todo.isCompleted
+        ..isFavorite = action.todo.isFavorite,
+    ));
   return state;
 }

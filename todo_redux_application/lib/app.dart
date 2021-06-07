@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:todo_redux_application/layers/domain/state/app_state.dart';
+import 'package:todo_redux_application/layers/domain/state/todo_state.dart';
 import 'package:todo_redux_application/layers/presentation/screens/edit_todo_screen.dart';
 
 import 'layers/presentation/screens/root_page.dart';
 
 class ReduxApp extends StatelessWidget {
-  final Store<AppState> store;
+  final Store<TodoState> store;
 
   const ReduxApp({Key key, @required this.store}) : super(key: key);
 

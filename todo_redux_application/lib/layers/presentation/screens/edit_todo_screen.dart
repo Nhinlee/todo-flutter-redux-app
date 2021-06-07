@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:todo_redux_application/entity/todo_entity.dart';
 import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
-import 'package:todo_redux_application/layers/domain/state/app_state.dart';
+import 'package:todo_redux_application/layers/domain/state/todo_state.dart';
 import 'package:todo_redux_application/layers/presentation/widgets/edit_todo_text_field.dart';
 import 'package:todo_redux_application/layers/presentation/widgets/my_app_bar.dart';
 import 'package:todo_redux_application/layers/presentation/widgets/title_text_widget.dart';
@@ -42,7 +42,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
 
   void _submitHandler(BuildContext context) {
     if (widget.args.type == EditTodoType.AddNew) {
-      StoreProvider.of<AppState>(context, listen: false).dispatch(
+      StoreProvider.of<TodoState>(context, listen: false).dispatch(
         AddNewTodoAction(
           todo: TodoEntity(
             (todo) => todo
@@ -55,7 +55,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
         ),
       );
     } else if (widget.args.type == EditTodoType.Update) {
-      StoreProvider.of<AppState>(context, listen: false).dispatch(
+      StoreProvider.of<TodoState>(context, listen: false).dispatch(
         UpdateTodoAction(
           todo: widget.args.todo.rebuild(
             (todo) => todo

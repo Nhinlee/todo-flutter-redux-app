@@ -1,6 +1,7 @@
 import 'dart:developer' as dev;
 import 'dart:math';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:todo_redux_application/core/sqlite/sqlite_helper.dart';
 import 'package:todo_redux_application/core/sqlite/table_helper.dart';
@@ -11,7 +12,7 @@ class TodoLocalDataSource {
 
   TodoLocalDataSource({@required this.sqLiteHelper});
 
-  Future<List<TodoEntity>> getAllTodo() async {
+  Future<BuiltList<TodoEntity>> getAllTodo() async {
     try {
       final rows = await sqLiteHelper.getAll(TodoTableHelper.tableName);
       return rows.length > 0
@@ -20,8 +21,8 @@ class TodoLocalDataSource {
               TodoEntity.currentMaxId =
                   max(TodoEntity.currentMaxId, newTodo.id);
               return newTodo;
-            }).toList()
-          : [];
+            }).toBuiltList()
+          : [].build();
     } catch (e) {
       dev.log(e.toString());
       throw e;

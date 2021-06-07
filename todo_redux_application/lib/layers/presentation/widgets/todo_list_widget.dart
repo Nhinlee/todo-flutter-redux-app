@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:todo_redux_application/entity/todo_entity.dart';
 import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
-import 'package:todo_redux_application/layers/domain/state/app_state.dart';
+import 'package:todo_redux_application/layers/domain/state/todo_state.dart';
 import 'package:todo_redux_application/layers/presentation/screens/edit_todo_screen.dart';
 
 import 'todo_item_widget.dart';
@@ -15,7 +15,7 @@ class TodoListWidget extends StatelessWidget {
   const TodoListWidget({Key key, @required this.todoList}) : super(key: key);
 
   void updateTodoHandler(BuildContext context, TodoEntity todo) {
-    StoreProvider.of<AppState>(context).dispatch(UpdateTodoAction(todo: todo));
+    StoreProvider.of<TodoState>(context).dispatch(UpdateTodoAction(todo: todo));
   }
 
   void editTodoHandler(BuildContext context, TodoEntity todo) {

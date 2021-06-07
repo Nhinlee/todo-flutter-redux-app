@@ -4,29 +4,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:redux_epics/redux_epics.dart';
 import 'package:todo_redux_application/layers/data/repository/todo_repository.dart';
 import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
-import 'package:todo_redux_application/layers/domain/state/app_state.dart';
+import 'package:todo_redux_application/layers/domain/state/todo_state.dart';
 
-class TodoEpic {
-  final TodoRepository repository;
+class TodoMiddleware extends EpicClass<TodoState> {
+  final AbstractTodoRepository repository;
 
-  TodoEpic({@required this.repository});
+  TodoMiddleware({@required this.repository});
 
-  Epic<AppState> get combineEpic => combineEpics([
-        loadTodosEpic,
-        updateTodoEpic,
-        addNewTodoEpic,
-      ]);
+  @override
+  Stream<TodoAction> call(Stream<dynamic> actions, EpicStore<TodoState> store) {
+    return combineEpics<TodoState>([
+      loadTodosEpic,
+      updateTodoEpic,
+      addNewTodoEpic,
+    ])(actions, store);
+  }
 
-  Stream<dynamic> loadTodosEpic(
+  Stream<TodoAction> loadTodosEpic(
     Stream<dynamic> actions,
-    EpicStore<AppState> store,
+    EpicStore<AbstractTodoState> store,
   ) {
     return actions
         .where((action) => action is LoadTodosAction)
         .asyncMap((action) async {
       try {
         final todos = await repository.getTodoList();
-        return LoadTodosSuccessAction(todoList: todos);
+        return LoadTodosSuccessAction((updates) => updates..todoList.addAll(todos));
       } on Exception catch (e) {
         log(e.toString());
         return LoadTodosFailedAction();
@@ -34,9 +37,9 @@ class TodoEpic {
     });
   }
 
-  Stream<dynamic> addNewTodoEpic(
+  Stream<TodoAction> addNewTodoEpic(
     Stream<dynamic> actions,
-    EpicStore<AppState> store,
+    EpicStore<TodoState> store,
   ) {
     return actions
         .where((action) => action is AddNewTodoAction)
@@ -50,9 +53,9 @@ class TodoEpic {
     });
   }
 
-  Stream<dynamic> updateTodoEpic(
+  Stream<TodoAction> updateTodoEpic(
     Stream<dynamic> actions,
-    EpicStore<AppState> store,
+    EpicStore<TodoState> store,
   ) {
     return actions
         .where((action) => action is UpdateTodoAction)
@@ -66,8 +69,3 @@ class TodoEpic {
     });
   }
 }
-
-// Stream<dynamic> loadTodosEpic(Stream<dynamic> actions, EpicStore<AppState> store) {
-//   return actions.where((event) => event is LoadTodosAction)
-//       .asyncMap((event) => )
-// }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
-import 'package:todo_redux_application/layers/domain/state/app_state.dart';
+import 'package:todo_redux_application/layers/domain/state/todo_state.dart';
 import 'package:todo_redux_application/layers/presentation/screens/edit_todo_screen.dart';
 import 'package:todo_redux_application/layers/presentation/widgets/my_app_bar.dart';
 
@@ -30,7 +30,7 @@ class _RootPageState extends State<RootPage> {
     super.initState();
 
     // Init
-    StoreProvider.of<AppState>(context, listen: false)
+    StoreProvider.of<TodoState>(context, listen: false)
         .dispatch(LoadTodosAction());
   }
 

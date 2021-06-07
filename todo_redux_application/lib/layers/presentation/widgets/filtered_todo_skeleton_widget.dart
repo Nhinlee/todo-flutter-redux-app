@@ -1,8 +1,9 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:todo_redux_application/entity/todo_entity.dart';
-import 'package:todo_redux_application/layers/domain/state/app_state.dart';
+import 'package:todo_redux_application/layers/domain/state/todo_state.dart';
 
 import 'title_text_widget.dart';
 import 'todo_list_widget.dart';
@@ -30,7 +31,7 @@ class FilteredTodoSkeletonWidget extends StatelessWidget {
       children: [
         TitleTextWidget(text: title),
         Expanded(
-          child: StoreConnector<AppState, _ViewModel>(
+          child: StoreConnector<TodoState, _ViewModel>(
             converter: _ViewModel.fromStore,
             builder: (context, vm) {
               if (vm.isLoading) {
@@ -39,7 +40,7 @@ class FilteredTodoSkeletonWidget extends StatelessWidget {
               switch (type) {
                 case FilterTodoType.All:
                   {
-                    return TodoListWidget(todoList: vm.todos);
+                    return TodoListWidget(todoList: vm.todos.toList());
                   }
                 case FilterTodoType.Completed:
                   {
@@ -57,7 +58,7 @@ class FilteredTodoSkeletonWidget extends StatelessWidget {
                   }
                 default:
                   {
-                    return TodoListWidget(todoList: vm.todos);
+                    return TodoListWidget(todoList: vm.todos.toList());
                   }
               }
             },
@@ -70,14 +71,14 @@ class FilteredTodoSkeletonWidget extends StatelessWidget {
 
 class _ViewModel {
   final bool isLoading;
-  final List<TodoEntity> todos;
+  final BuiltList<TodoEntity> todos;
 
   _ViewModel({
     @required this.isLoading,
     @required this.todos,
   });
 
-  static _ViewModel fromStore(Store<AppState> store) {
+  static _ViewModel fromStore(Store<TodoState> store) {
     return _ViewModel(
       isLoading: store.state.isLoading,
       todos: store.state.todoList,
