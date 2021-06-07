@@ -5,7 +5,7 @@ import 'package:todo_redux_application/layers/domain/state/todo_state.dart';
 TodoState appReducer(TodoState state, action) {
   return state.rebuild(
     (preState) => preState
-      ..todoList
+      ..todoList = todosReducer(state.todoList, action).toBuilder()
       ..isLoading = loadingReducer(state.isLoading, action),
   );
 }

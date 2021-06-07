@@ -6,21 +6,21 @@ import 'package:todo_redux_application/layers/data/repository/todo_repository.da
 import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
 import 'package:todo_redux_application/layers/domain/state/todo_state.dart';
 
-class TodoMiddleware extends EpicClass<TodoState> {
+class TodoMiddleware extends EpicClass<AbstractTodoState> {
   final AbstractTodoRepository repository;
 
   TodoMiddleware({@required this.repository});
 
   @override
-  Stream<TodoAction> call(Stream<dynamic> actions, EpicStore<TodoState> store) {
-    return combineEpics<TodoState>([
+  Stream<dynamic> call(Stream<dynamic> actions, EpicStore<AbstractTodoState> store) {
+    return combineEpics<AbstractTodoState>([
       loadTodosEpic,
       updateTodoEpic,
       addNewTodoEpic,
     ])(actions, store);
   }
 
-  Stream<TodoAction> loadTodosEpic(
+  Stream<dynamic> loadTodosEpic(
     Stream<dynamic> actions,
     EpicStore<AbstractTodoState> store,
   ) {
@@ -29,7 +29,8 @@ class TodoMiddleware extends EpicClass<TodoState> {
         .asyncMap((action) async {
       try {
         final todos = await repository.getTodoList();
-        return LoadTodosSuccessAction((updates) => updates..todoList.addAll(todos));
+        return LoadTodosSuccessAction(
+            (updates) => updates..todoList.addAll(todos));
       } on Exception catch (e) {
         log(e.toString());
         return LoadTodosFailedAction();
@@ -37,9 +38,9 @@ class TodoMiddleware extends EpicClass<TodoState> {
     });
   }
 
-  Stream<TodoAction> addNewTodoEpic(
+  Stream<dynamic> addNewTodoEpic(
     Stream<dynamic> actions,
-    EpicStore<TodoState> store,
+    EpicStore<AbstractTodoState> store,
   ) {
     return actions
         .where((action) => action is AddNewTodoAction)
@@ -48,14 +49,16 @@ class TodoMiddleware extends EpicClass<TodoState> {
         await repository.addNewTodo(action.todo);
         return AddNewTodoSuccessAction();
       } on Exception catch (e) {
-        return AddNewTodoFailedAction(todo: action.todo);
+        return AddNewTodoFailedAction(
+          (updates) => updates.todo = action.todo.toBuilder(),
+        );
       }
     });
   }
 
-  Stream<TodoAction> updateTodoEpic(
+  Stream<dynamic> updateTodoEpic(
     Stream<dynamic> actions,
-    EpicStore<TodoState> store,
+    EpicStore<AbstractTodoState> store,
   ) {
     return actions
         .where((action) => action is UpdateTodoAction)

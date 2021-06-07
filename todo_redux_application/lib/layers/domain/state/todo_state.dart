@@ -6,7 +6,6 @@ part 'todo_state.g.dart';
 
 abstract class AbstractTodoState {
   BuiltList<TodoEntity> get todoList;
-
   bool get isLoading;
 }
 

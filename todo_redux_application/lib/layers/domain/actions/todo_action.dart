@@ -33,28 +33,70 @@ abstract class LoadTodosSuccessAction
 
 // Add New To-do Action
 
-class AddNewTodoAction implements TodoAction {
-  final TodoEntity todo;
+abstract class AddNewTodoAction
+    implements TodoAction, Built<AddNewTodoAction, AddNewTodoActionBuilder> {
+  TodoEntity get todo;
 
-  AddNewTodoAction({@required this.todo});
+  AddNewTodoAction._();
+
+  factory AddNewTodoAction([void Function(AddNewTodoActionBuilder) updates]) =
+      _$AddNewTodoAction;
 }
 
-class AddNewTodoFailedAction implements TodoAction {
-  final TodoEntity todo;
+abstract class AddNewTodoFailedAction
+    implements
+        TodoAction,
+        Built<AddNewTodoFailedAction, AddNewTodoFailedActionBuilder> {
+  TodoEntity get todo;
 
-  AddNewTodoFailedAction({@required this.todo});
+  AddNewTodoFailedAction._();
+
+  factory AddNewTodoFailedAction(
+          [void Function(AddNewTodoFailedActionBuilder) updates]) =
+      _$AddNewTodoFailedAction;
 }
 
-class AddNewTodoSuccessAction implements TodoAction {}
+abstract class AddNewTodoSuccessAction
+    implements
+        TodoAction,
+        Built<AddNewTodoSuccessAction, AddNewTodoSuccessActionBuilder> {
+  AddNewTodoSuccessAction._();
+
+  factory AddNewTodoSuccessAction(
+          [void Function(AddNewTodoSuccessActionBuilder) updates]) =
+      _$AddNewTodoSuccessAction;
+}
 
 // Update To-do Action
 
-class UpdateTodoAction implements TodoAction {
-  final TodoEntity todo;
+abstract class UpdateTodoAction
+    implements TodoAction, Built<UpdateTodoAction, UpdateTodoActionBuilder> {
+  TodoEntity get todo;
 
-  UpdateTodoAction({@required this.todo});
+  UpdateTodoAction._();
+
+  factory UpdateTodoAction([void Function(UpdateTodoActionBuilder) updates]) =
+      _$UpdateTodoAction;
 }
 
-class UpdateTodoSuccessAction implements TodoAction {}
+abstract class UpdateTodoSuccessAction
+    implements
+        TodoAction,
+        Built<UpdateTodoSuccessAction, UpdateTodoSuccessActionBuilder> {
+  UpdateTodoSuccessAction._();
 
-class UpdateTodoFailedAction implements TodoAction {}
+  factory UpdateTodoSuccessAction(
+          [void Function(UpdateTodoSuccessActionBuilder) updates]) =
+      _$UpdateTodoSuccessAction;
+}
+
+abstract class UpdateTodoFailedAction
+    implements
+        TodoAction,
+        Built<UpdateTodoFailedAction, UpdateTodoFailedActionBuilder> {
+  UpdateTodoFailedAction._();
+
+  factory UpdateTodoFailedAction(
+          [void Function(UpdateTodoFailedActionBuilder) updates]) =
+      _$UpdateTodoFailedAction;
+}

@@ -42,26 +42,29 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
 
   void _submitHandler(BuildContext context) {
     if (widget.args.type == EditTodoType.AddNew) {
-      StoreProvider.of<TodoState>(context, listen: false).dispatch(
-        AddNewTodoAction(
-          todo: TodoEntity(
+      StoreProvider.of<TodoState>(context, listen: false)
+          .dispatch(AddNewTodoAction(
+        (updates) => updates
+          ..todo = TodoEntity(
             (todo) => todo
               ..id = ++TodoEntity.currentMaxId
               ..title = _titleController.text
               ..desc = _descController.text
               ..isCompleted = false
               ..isFavorite = false,
-          ),
-        ),
-      );
+          ).toBuilder(),
+      ));
     } else if (widget.args.type == EditTodoType.Update) {
       StoreProvider.of<TodoState>(context, listen: false).dispatch(
         UpdateTodoAction(
-          todo: widget.args.todo.rebuild(
-            (todo) => todo
-              ..title = _titleController.text
-              ..desc = _descController.text,
-          ),
+          (updates) => updates
+            ..todo = widget.args.todo
+                .rebuild(
+                  (todo) => todo
+                    ..title = _titleController.text
+                    ..desc = _descController.text,
+                )
+                .toBuilder(),
         ),
       );
     }

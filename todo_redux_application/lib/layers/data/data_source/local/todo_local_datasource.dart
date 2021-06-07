@@ -22,7 +22,7 @@ class TodoLocalDataSource {
                   max(TodoEntity.currentMaxId, newTodo.id);
               return newTodo;
             }).toBuiltList()
-          : [].build();
+          : BuiltList<TodoEntity>([]);
     } catch (e) {
       dev.log(e.toString());
       throw e;

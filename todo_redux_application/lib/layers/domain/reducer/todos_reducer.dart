@@ -9,7 +9,8 @@ final todosReducer = combineReducers<BuiltList<TodoEntity>>([
   TypedReducer<BuiltList<TodoEntity>, LoadTodosSuccessAction>(_setLoadedTodo),
   TypedReducer<BuiltList<TodoEntity>, LoadTodosFailedAction>(_setNoTodo),
   TypedReducer<BuiltList<TodoEntity>, AddNewTodoAction>(_addNewTodo),
-  TypedReducer<BuiltList<TodoEntity>, AddNewTodoFailedAction>(_addNewTodoRollback),
+  TypedReducer<BuiltList<TodoEntity>, AddNewTodoFailedAction>(
+      _addNewTodoRollback),
   TypedReducer<BuiltList<TodoEntity>, UpdateTodoAction>(_updateTodo),
 ]);
 
@@ -37,13 +38,15 @@ BuiltList<TodoEntity> _updateTodo(
     BuiltList<TodoEntity> state, UpdateTodoAction action) {
   final updateTodoIndex = state.indexWhere((todo) => todo.id == action.todo.id);
 
-  state.rebuild((list) => list
-    ..[updateTodoIndex].rebuild(
+  final newState = state.rebuild(
+    (updates) => updates[updateTodoIndex] = updates[updateTodoIndex].rebuild(
       (preTodo) => preTodo
         ..title = action.todo.title
         ..desc = action.todo.desc
         ..isCompleted = action.todo.isCompleted
         ..isFavorite = action.todo.isFavorite,
-    ));
-  return state;
+    ),
+  );
+
+  return newState;
 }

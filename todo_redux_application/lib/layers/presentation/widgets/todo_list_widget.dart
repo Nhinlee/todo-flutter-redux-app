@@ -15,7 +15,8 @@ class TodoListWidget extends StatelessWidget {
   const TodoListWidget({Key key, @required this.todoList}) : super(key: key);
 
   void updateTodoHandler(BuildContext context, TodoEntity todo) {
-    StoreProvider.of<TodoState>(context).dispatch(UpdateTodoAction(todo: todo));
+    StoreProvider.of<TodoState>(context).dispatch(
+        UpdateTodoAction((updates) => updates..todo = todo.toBuilder()));
   }
 
   void editTodoHandler(BuildContext context, TodoEntity todo) {
