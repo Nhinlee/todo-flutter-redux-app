@@ -6,88 +6,89 @@ part of 'todo_action.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$LoadTodosAction extends LoadTodosAction {
-  factory _$LoadTodosAction([void Function(LoadTodosActionBuilder) updates]) =>
-      (new LoadTodosActionBuilder()..update(updates)).build();
+class _$DoLoadTodosAction extends DoLoadTodosAction {
+  factory _$DoLoadTodosAction(
+          [void Function(DoLoadTodosActionBuilder) updates]) =>
+      (new DoLoadTodosActionBuilder()..update(updates)).build();
 
-  _$LoadTodosAction._() : super._();
+  _$DoLoadTodosAction._() : super._();
 
   @override
-  LoadTodosAction rebuild(void Function(LoadTodosActionBuilder) updates) =>
+  DoLoadTodosAction rebuild(void Function(DoLoadTodosActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  LoadTodosActionBuilder toBuilder() =>
-      new LoadTodosActionBuilder()..replace(this);
+  DoLoadTodosActionBuilder toBuilder() =>
+      new DoLoadTodosActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is LoadTodosAction;
+    return other is DoLoadTodosAction;
   }
 
   @override
   int get hashCode {
-    return 1062496585;
+    return 22783335;
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('LoadTodosAction').toString();
+    return newBuiltValueToStringHelper('DoLoadTodosAction').toString();
   }
 }
 
-class LoadTodosActionBuilder
-    implements Builder<LoadTodosAction, LoadTodosActionBuilder> {
-  _$LoadTodosAction _$v;
+class DoLoadTodosActionBuilder
+    implements Builder<DoLoadTodosAction, DoLoadTodosActionBuilder> {
+  _$DoLoadTodosAction _$v;
 
-  LoadTodosActionBuilder();
+  DoLoadTodosActionBuilder();
 
   @override
-  void replace(LoadTodosAction other) {
+  void replace(DoLoadTodosAction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$LoadTodosAction;
+    _$v = other as _$DoLoadTodosAction;
   }
 
   @override
-  void update(void Function(LoadTodosActionBuilder) updates) {
+  void update(void Function(DoLoadTodosActionBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$LoadTodosAction build() {
-    final _$result = _$v ?? new _$LoadTodosAction._();
+  _$DoLoadTodosAction build() {
+    final _$result = _$v ?? new _$DoLoadTodosAction._();
     replace(_$result);
     return _$result;
   }
 }
 
-class _$LoadTodosSuccessAction extends LoadTodosSuccessAction {
+class _$SetLoadTodosSuccessAction extends SetLoadTodosSuccessAction {
   @override
   final BuiltList<TodoEntity> todoList;
 
-  factory _$LoadTodosSuccessAction(
-          [void Function(LoadTodosSuccessActionBuilder) updates]) =>
-      (new LoadTodosSuccessActionBuilder()..update(updates)).build();
+  factory _$SetLoadTodosSuccessAction(
+          [void Function(SetLoadTodosSuccessActionBuilder) updates]) =>
+      (new SetLoadTodosSuccessActionBuilder()..update(updates)).build();
 
-  _$LoadTodosSuccessAction._({this.todoList}) : super._() {
+  _$SetLoadTodosSuccessAction._({this.todoList}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        todoList, 'LoadTodosSuccessAction', 'todoList');
+        todoList, 'SetLoadTodosSuccessAction', 'todoList');
   }
 
   @override
-  LoadTodosSuccessAction rebuild(
-          void Function(LoadTodosSuccessActionBuilder) updates) =>
+  SetLoadTodosSuccessAction rebuild(
+          void Function(SetLoadTodosSuccessActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  LoadTodosSuccessActionBuilder toBuilder() =>
-      new LoadTodosSuccessActionBuilder()..replace(this);
+  SetLoadTodosSuccessActionBuilder toBuilder() =>
+      new SetLoadTodosSuccessActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is LoadTodosSuccessAction && todoList == other.todoList;
+    return other is SetLoadTodosSuccessAction && todoList == other.todoList;
   }
 
   @override
@@ -97,24 +98,25 @@ class _$LoadTodosSuccessAction extends LoadTodosSuccessAction {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('LoadTodosSuccessAction')
+    return (newBuiltValueToStringHelper('SetLoadTodosSuccessAction')
           ..add('todoList', todoList))
         .toString();
   }
 }
 
-class LoadTodosSuccessActionBuilder
-    implements Builder<LoadTodosSuccessAction, LoadTodosSuccessActionBuilder> {
-  _$LoadTodosSuccessAction _$v;
+class SetLoadTodosSuccessActionBuilder
+    implements
+        Builder<SetLoadTodosSuccessAction, SetLoadTodosSuccessActionBuilder> {
+  _$SetLoadTodosSuccessAction _$v;
 
   ListBuilder<TodoEntity> _todoList;
   ListBuilder<TodoEntity> get todoList =>
       _$this._todoList ??= new ListBuilder<TodoEntity>();
   set todoList(ListBuilder<TodoEntity> todoList) => _$this._todoList = todoList;
 
-  LoadTodosSuccessActionBuilder();
+  SetLoadTodosSuccessActionBuilder();
 
-  LoadTodosSuccessActionBuilder get _$this {
+  SetLoadTodosSuccessActionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _todoList = $v.todoList.toBuilder();
@@ -124,22 +126,22 @@ class LoadTodosSuccessActionBuilder
   }
 
   @override
-  void replace(LoadTodosSuccessAction other) {
+  void replace(SetLoadTodosSuccessAction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$LoadTodosSuccessAction;
+    _$v = other as _$SetLoadTodosSuccessAction;
   }
 
   @override
-  void update(void Function(LoadTodosSuccessActionBuilder) updates) {
+  void update(void Function(SetLoadTodosSuccessActionBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$LoadTodosSuccessAction build() {
-    _$LoadTodosSuccessAction _$result;
+  _$SetLoadTodosSuccessAction build() {
+    _$SetLoadTodosSuccessAction _$result;
     try {
       _$result =
-          _$v ?? new _$LoadTodosSuccessAction._(todoList: todoList.build());
+          _$v ?? new _$SetLoadTodosSuccessAction._(todoList: todoList.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -147,7 +149,7 @@ class LoadTodosSuccessActionBuilder
         todoList.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'LoadTodosSuccessAction', _$failedField, e.toString());
+            'SetLoadTodosSuccessAction', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -156,30 +158,31 @@ class LoadTodosSuccessActionBuilder
   }
 }
 
-class _$AddNewTodoAction extends AddNewTodoAction {
+class _$DoAddNewTodoAction extends DoAddNewTodoAction {
   @override
   final TodoEntity todo;
 
-  factory _$AddNewTodoAction(
-          [void Function(AddNewTodoActionBuilder) updates]) =>
-      (new AddNewTodoActionBuilder()..update(updates)).build();
+  factory _$DoAddNewTodoAction(
+          [void Function(DoAddNewTodoActionBuilder) updates]) =>
+      (new DoAddNewTodoActionBuilder()..update(updates)).build();
 
-  _$AddNewTodoAction._({this.todo}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(todo, 'AddNewTodoAction', 'todo');
+  _$DoAddNewTodoAction._({this.todo}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(todo, 'DoAddNewTodoAction', 'todo');
   }
 
   @override
-  AddNewTodoAction rebuild(void Function(AddNewTodoActionBuilder) updates) =>
+  DoAddNewTodoAction rebuild(
+          void Function(DoAddNewTodoActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  AddNewTodoActionBuilder toBuilder() =>
-      new AddNewTodoActionBuilder()..replace(this);
+  DoAddNewTodoActionBuilder toBuilder() =>
+      new DoAddNewTodoActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AddNewTodoAction && todo == other.todo;
+    return other is DoAddNewTodoAction && todo == other.todo;
   }
 
   @override
@@ -189,114 +192,23 @@ class _$AddNewTodoAction extends AddNewTodoAction {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('AddNewTodoAction')..add('todo', todo))
-        .toString();
-  }
-}
-
-class AddNewTodoActionBuilder
-    implements Builder<AddNewTodoAction, AddNewTodoActionBuilder> {
-  _$AddNewTodoAction _$v;
-
-  TodoEntityBuilder _todo;
-  TodoEntityBuilder get todo => _$this._todo ??= new TodoEntityBuilder();
-  set todo(TodoEntityBuilder todo) => _$this._todo = todo;
-
-  AddNewTodoActionBuilder();
-
-  AddNewTodoActionBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _todo = $v.todo.toBuilder();
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(AddNewTodoAction other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$AddNewTodoAction;
-  }
-
-  @override
-  void update(void Function(AddNewTodoActionBuilder) updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$AddNewTodoAction build() {
-    _$AddNewTodoAction _$result;
-    try {
-      _$result = _$v ?? new _$AddNewTodoAction._(todo: todo.build());
-    } catch (_) {
-      String _$failedField;
-      try {
-        _$failedField = 'todo';
-        todo.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'AddNewTodoAction', _$failedField, e.toString());
-      }
-      rethrow;
-    }
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$AddNewTodoFailedAction extends AddNewTodoFailedAction {
-  @override
-  final TodoEntity todo;
-
-  factory _$AddNewTodoFailedAction(
-          [void Function(AddNewTodoFailedActionBuilder) updates]) =>
-      (new AddNewTodoFailedActionBuilder()..update(updates)).build();
-
-  _$AddNewTodoFailedAction._({this.todo}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        todo, 'AddNewTodoFailedAction', 'todo');
-  }
-
-  @override
-  AddNewTodoFailedAction rebuild(
-          void Function(AddNewTodoFailedActionBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  AddNewTodoFailedActionBuilder toBuilder() =>
-      new AddNewTodoFailedActionBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is AddNewTodoFailedAction && todo == other.todo;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(0, todo.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('AddNewTodoFailedAction')
+    return (newBuiltValueToStringHelper('DoAddNewTodoAction')
           ..add('todo', todo))
         .toString();
   }
 }
 
-class AddNewTodoFailedActionBuilder
-    implements Builder<AddNewTodoFailedAction, AddNewTodoFailedActionBuilder> {
-  _$AddNewTodoFailedAction _$v;
+class DoAddNewTodoActionBuilder
+    implements Builder<DoAddNewTodoAction, DoAddNewTodoActionBuilder> {
+  _$DoAddNewTodoAction _$v;
 
   TodoEntityBuilder _todo;
   TodoEntityBuilder get todo => _$this._todo ??= new TodoEntityBuilder();
   set todo(TodoEntityBuilder todo) => _$this._todo = todo;
 
-  AddNewTodoFailedActionBuilder();
+  DoAddNewTodoActionBuilder();
 
-  AddNewTodoFailedActionBuilder get _$this {
+  DoAddNewTodoActionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _todo = $v.todo.toBuilder();
@@ -306,21 +218,21 @@ class AddNewTodoFailedActionBuilder
   }
 
   @override
-  void replace(AddNewTodoFailedAction other) {
+  void replace(DoAddNewTodoAction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$AddNewTodoFailedAction;
+    _$v = other as _$DoAddNewTodoAction;
   }
 
   @override
-  void update(void Function(AddNewTodoFailedActionBuilder) updates) {
+  void update(void Function(DoAddNewTodoActionBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$AddNewTodoFailedAction build() {
-    _$AddNewTodoFailedAction _$result;
+  _$DoAddNewTodoAction build() {
+    _$DoAddNewTodoAction _$result;
     try {
-      _$result = _$v ?? new _$AddNewTodoFailedAction._(todo: todo.build());
+      _$result = _$v ?? new _$DoAddNewTodoAction._(todo: todo.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -328,7 +240,7 @@ class AddNewTodoFailedActionBuilder
         todo.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'AddNewTodoFailedAction', _$failedField, e.toString());
+            'DoAddNewTodoAction', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -337,89 +249,32 @@ class AddNewTodoFailedActionBuilder
   }
 }
 
-class _$AddNewTodoSuccessAction extends AddNewTodoSuccessAction {
-  factory _$AddNewTodoSuccessAction(
-          [void Function(AddNewTodoSuccessActionBuilder) updates]) =>
-      (new AddNewTodoSuccessActionBuilder()..update(updates)).build();
-
-  _$AddNewTodoSuccessAction._() : super._();
-
-  @override
-  AddNewTodoSuccessAction rebuild(
-          void Function(AddNewTodoSuccessActionBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  AddNewTodoSuccessActionBuilder toBuilder() =>
-      new AddNewTodoSuccessActionBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is AddNewTodoSuccessAction;
-  }
-
-  @override
-  int get hashCode {
-    return 364130615;
-  }
-
-  @override
-  String toString() {
-    return newBuiltValueToStringHelper('AddNewTodoSuccessAction').toString();
-  }
-}
-
-class AddNewTodoSuccessActionBuilder
-    implements
-        Builder<AddNewTodoSuccessAction, AddNewTodoSuccessActionBuilder> {
-  _$AddNewTodoSuccessAction _$v;
-
-  AddNewTodoSuccessActionBuilder();
-
-  @override
-  void replace(AddNewTodoSuccessAction other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$AddNewTodoSuccessAction;
-  }
-
-  @override
-  void update(void Function(AddNewTodoSuccessActionBuilder) updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$AddNewTodoSuccessAction build() {
-    final _$result = _$v ?? new _$AddNewTodoSuccessAction._();
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$UpdateTodoAction extends UpdateTodoAction {
+class _$SetAddNewTodoFailedAction extends SetAddNewTodoFailedAction {
   @override
   final TodoEntity todo;
 
-  factory _$UpdateTodoAction(
-          [void Function(UpdateTodoActionBuilder) updates]) =>
-      (new UpdateTodoActionBuilder()..update(updates)).build();
+  factory _$SetAddNewTodoFailedAction(
+          [void Function(SetAddNewTodoFailedActionBuilder) updates]) =>
+      (new SetAddNewTodoFailedActionBuilder()..update(updates)).build();
 
-  _$UpdateTodoAction._({this.todo}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(todo, 'UpdateTodoAction', 'todo');
+  _$SetAddNewTodoFailedAction._({this.todo}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        todo, 'SetAddNewTodoFailedAction', 'todo');
   }
 
   @override
-  UpdateTodoAction rebuild(void Function(UpdateTodoActionBuilder) updates) =>
+  SetAddNewTodoFailedAction rebuild(
+          void Function(SetAddNewTodoFailedActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  UpdateTodoActionBuilder toBuilder() =>
-      new UpdateTodoActionBuilder()..replace(this);
+  SetAddNewTodoFailedActionBuilder toBuilder() =>
+      new SetAddNewTodoFailedActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UpdateTodoAction && todo == other.todo;
+    return other is SetAddNewTodoFailedAction && todo == other.todo;
   }
 
   @override
@@ -429,22 +284,24 @@ class _$UpdateTodoAction extends UpdateTodoAction {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('UpdateTodoAction')..add('todo', todo))
+    return (newBuiltValueToStringHelper('SetAddNewTodoFailedAction')
+          ..add('todo', todo))
         .toString();
   }
 }
 
-class UpdateTodoActionBuilder
-    implements Builder<UpdateTodoAction, UpdateTodoActionBuilder> {
-  _$UpdateTodoAction _$v;
+class SetAddNewTodoFailedActionBuilder
+    implements
+        Builder<SetAddNewTodoFailedAction, SetAddNewTodoFailedActionBuilder> {
+  _$SetAddNewTodoFailedAction _$v;
 
   TodoEntityBuilder _todo;
   TodoEntityBuilder get todo => _$this._todo ??= new TodoEntityBuilder();
   set todo(TodoEntityBuilder todo) => _$this._todo = todo;
 
-  UpdateTodoActionBuilder();
+  SetAddNewTodoFailedActionBuilder();
 
-  UpdateTodoActionBuilder get _$this {
+  SetAddNewTodoFailedActionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _todo = $v.todo.toBuilder();
@@ -454,21 +311,21 @@ class UpdateTodoActionBuilder
   }
 
   @override
-  void replace(UpdateTodoAction other) {
+  void replace(SetAddNewTodoFailedAction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$UpdateTodoAction;
+    _$v = other as _$SetAddNewTodoFailedAction;
   }
 
   @override
-  void update(void Function(UpdateTodoActionBuilder) updates) {
+  void update(void Function(SetAddNewTodoFailedActionBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$UpdateTodoAction build() {
-    _$UpdateTodoAction _$result;
+  _$SetAddNewTodoFailedAction build() {
+    _$SetAddNewTodoFailedAction _$result;
     try {
-      _$result = _$v ?? new _$UpdateTodoAction._(todo: todo.build());
+      _$result = _$v ?? new _$SetAddNewTodoFailedAction._(todo: todo.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -476,7 +333,7 @@ class UpdateTodoActionBuilder
         todo.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'UpdateTodoAction', _$failedField, e.toString());
+            'SetAddNewTodoFailedAction', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -485,118 +342,269 @@ class UpdateTodoActionBuilder
   }
 }
 
-class _$UpdateTodoSuccessAction extends UpdateTodoSuccessAction {
-  factory _$UpdateTodoSuccessAction(
-          [void Function(UpdateTodoSuccessActionBuilder) updates]) =>
-      (new UpdateTodoSuccessActionBuilder()..update(updates)).build();
+class _$SetAddNewTodoSuccessAction extends SetAddNewTodoSuccessAction {
+  factory _$SetAddNewTodoSuccessAction(
+          [void Function(SetAddNewTodoSuccessActionBuilder) updates]) =>
+      (new SetAddNewTodoSuccessActionBuilder()..update(updates)).build();
 
-  _$UpdateTodoSuccessAction._() : super._();
+  _$SetAddNewTodoSuccessAction._() : super._();
 
   @override
-  UpdateTodoSuccessAction rebuild(
-          void Function(UpdateTodoSuccessActionBuilder) updates) =>
+  SetAddNewTodoSuccessAction rebuild(
+          void Function(SetAddNewTodoSuccessActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  UpdateTodoSuccessActionBuilder toBuilder() =>
-      new UpdateTodoSuccessActionBuilder()..replace(this);
+  SetAddNewTodoSuccessActionBuilder toBuilder() =>
+      new SetAddNewTodoSuccessActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UpdateTodoSuccessAction;
+    return other is SetAddNewTodoSuccessAction;
   }
 
   @override
   int get hashCode {
-    return 70157114;
+    return 864782130;
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('UpdateTodoSuccessAction').toString();
+    return newBuiltValueToStringHelper('SetAddNewTodoSuccessAction').toString();
   }
 }
 
-class UpdateTodoSuccessActionBuilder
+class SetAddNewTodoSuccessActionBuilder
     implements
-        Builder<UpdateTodoSuccessAction, UpdateTodoSuccessActionBuilder> {
-  _$UpdateTodoSuccessAction _$v;
+        Builder<SetAddNewTodoSuccessAction, SetAddNewTodoSuccessActionBuilder> {
+  _$SetAddNewTodoSuccessAction _$v;
 
-  UpdateTodoSuccessActionBuilder();
+  SetAddNewTodoSuccessActionBuilder();
 
   @override
-  void replace(UpdateTodoSuccessAction other) {
+  void replace(SetAddNewTodoSuccessAction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$UpdateTodoSuccessAction;
+    _$v = other as _$SetAddNewTodoSuccessAction;
   }
 
   @override
-  void update(void Function(UpdateTodoSuccessActionBuilder) updates) {
+  void update(void Function(SetAddNewTodoSuccessActionBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$UpdateTodoSuccessAction build() {
-    final _$result = _$v ?? new _$UpdateTodoSuccessAction._();
+  _$SetAddNewTodoSuccessAction build() {
+    final _$result = _$v ?? new _$SetAddNewTodoSuccessAction._();
     replace(_$result);
     return _$result;
   }
 }
 
-class _$UpdateTodoFailedAction extends UpdateTodoFailedAction {
-  factory _$UpdateTodoFailedAction(
-          [void Function(UpdateTodoFailedActionBuilder) updates]) =>
-      (new UpdateTodoFailedActionBuilder()..update(updates)).build();
+class _$DoUpdateTodoAction extends DoUpdateTodoAction {
+  @override
+  final TodoEntity todo;
 
-  _$UpdateTodoFailedAction._() : super._();
+  factory _$DoUpdateTodoAction(
+          [void Function(DoUpdateTodoActionBuilder) updates]) =>
+      (new DoUpdateTodoActionBuilder()..update(updates)).build();
+
+  _$DoUpdateTodoAction._({this.todo}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(todo, 'DoUpdateTodoAction', 'todo');
+  }
 
   @override
-  UpdateTodoFailedAction rebuild(
-          void Function(UpdateTodoFailedActionBuilder) updates) =>
+  DoUpdateTodoAction rebuild(
+          void Function(DoUpdateTodoActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  UpdateTodoFailedActionBuilder toBuilder() =>
-      new UpdateTodoFailedActionBuilder()..replace(this);
+  DoUpdateTodoActionBuilder toBuilder() =>
+      new DoUpdateTodoActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UpdateTodoFailedAction;
+    return other is DoUpdateTodoAction && todo == other.todo;
   }
 
   @override
   int get hashCode {
-    return 1034295482;
+    return $jf($jc(0, todo.hashCode));
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('UpdateTodoFailedAction').toString();
+    return (newBuiltValueToStringHelper('DoUpdateTodoAction')
+          ..add('todo', todo))
+        .toString();
   }
 }
 
-class UpdateTodoFailedActionBuilder
-    implements Builder<UpdateTodoFailedAction, UpdateTodoFailedActionBuilder> {
-  _$UpdateTodoFailedAction _$v;
+class DoUpdateTodoActionBuilder
+    implements Builder<DoUpdateTodoAction, DoUpdateTodoActionBuilder> {
+  _$DoUpdateTodoAction _$v;
 
-  UpdateTodoFailedActionBuilder();
+  TodoEntityBuilder _todo;
+  TodoEntityBuilder get todo => _$this._todo ??= new TodoEntityBuilder();
+  set todo(TodoEntityBuilder todo) => _$this._todo = todo;
 
-  @override
-  void replace(UpdateTodoFailedAction other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$UpdateTodoFailedAction;
+  DoUpdateTodoActionBuilder();
+
+  DoUpdateTodoActionBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _todo = $v.todo.toBuilder();
+      _$v = null;
+    }
+    return this;
   }
 
   @override
-  void update(void Function(UpdateTodoFailedActionBuilder) updates) {
+  void replace(DoUpdateTodoAction other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$DoUpdateTodoAction;
+  }
+
+  @override
+  void update(void Function(DoUpdateTodoActionBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$UpdateTodoFailedAction build() {
-    final _$result = _$v ?? new _$UpdateTodoFailedAction._();
+  _$DoUpdateTodoAction build() {
+    _$DoUpdateTodoAction _$result;
+    try {
+      _$result = _$v ?? new _$DoUpdateTodoAction._(todo: todo.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'todo';
+        todo.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'DoUpdateTodoAction', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SetUpdateTodoSuccessAction extends SetUpdateTodoSuccessAction {
+  factory _$SetUpdateTodoSuccessAction(
+          [void Function(SetUpdateTodoSuccessActionBuilder) updates]) =>
+      (new SetUpdateTodoSuccessActionBuilder()..update(updates)).build();
+
+  _$SetUpdateTodoSuccessAction._() : super._();
+
+  @override
+  SetUpdateTodoSuccessAction rebuild(
+          void Function(SetUpdateTodoSuccessActionBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SetUpdateTodoSuccessActionBuilder toBuilder() =>
+      new SetUpdateTodoSuccessActionBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SetUpdateTodoSuccessAction;
+  }
+
+  @override
+  int get hashCode {
+    return 175401319;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('SetUpdateTodoSuccessAction').toString();
+  }
+}
+
+class SetUpdateTodoSuccessActionBuilder
+    implements
+        Builder<SetUpdateTodoSuccessAction, SetUpdateTodoSuccessActionBuilder> {
+  _$SetUpdateTodoSuccessAction _$v;
+
+  SetUpdateTodoSuccessActionBuilder();
+
+  @override
+  void replace(SetUpdateTodoSuccessAction other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$SetUpdateTodoSuccessAction;
+  }
+
+  @override
+  void update(void Function(SetUpdateTodoSuccessActionBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SetUpdateTodoSuccessAction build() {
+    final _$result = _$v ?? new _$SetUpdateTodoSuccessAction._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SetUpdateTodoFailedAction extends SetUpdateTodoFailedAction {
+  factory _$SetUpdateTodoFailedAction(
+          [void Function(SetUpdateTodoFailedActionBuilder) updates]) =>
+      (new SetUpdateTodoFailedActionBuilder()..update(updates)).build();
+
+  _$SetUpdateTodoFailedAction._() : super._();
+
+  @override
+  SetUpdateTodoFailedAction rebuild(
+          void Function(SetUpdateTodoFailedActionBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SetUpdateTodoFailedActionBuilder toBuilder() =>
+      new SetUpdateTodoFailedActionBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SetUpdateTodoFailedAction;
+  }
+
+  @override
+  int get hashCode {
+    return 199619049;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('SetUpdateTodoFailedAction').toString();
+  }
+}
+
+class SetUpdateTodoFailedActionBuilder
+    implements
+        Builder<SetUpdateTodoFailedAction, SetUpdateTodoFailedActionBuilder> {
+  _$SetUpdateTodoFailedAction _$v;
+
+  SetUpdateTodoFailedActionBuilder();
+
+  @override
+  void replace(SetUpdateTodoFailedAction other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$SetUpdateTodoFailedAction;
+  }
+
+  @override
+  void update(void Function(SetUpdateTodoFailedActionBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SetUpdateTodoFailedAction build() {
+    final _$result = _$v ?? new _$SetUpdateTodoFailedAction._();
     replace(_$result);
     return _$result;
   }

@@ -32,7 +32,7 @@ Future<void> init() async {
         initialState: TodoState((state) => state
           ..todoList = BuiltList<TodoEntity>([]).toBuilder()
           ..isLoading = false),
-        middleware: [EpicMiddleware<AbstractTodoState>(sl<TodoMiddleware>())],
+        middleware: [EpicMiddleware<TodoState>(sl<TodoMiddleware>())],
       ));
 
   // Sql Singleton

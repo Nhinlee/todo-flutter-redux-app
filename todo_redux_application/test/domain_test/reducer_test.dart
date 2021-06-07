@@ -12,7 +12,7 @@ void main() {
       // GIVE
       final state = TodoState.initial();
       final store = Store<TodoState>(appReducer, initialState: state);
-      final action = LoadTodosAction();
+      final action = DoLoadTodosAction();
 
       // WHEN
       store.dispatch(action);
@@ -31,7 +31,7 @@ void main() {
           ..title = 'test'
           ..isCompleted = false,
       );
-      final action = AddNewTodoAction(
+      final action = DoAddNewTodoAction(
         (updates) => updates.todo = mockTodo.toBuilder(),
       );
 
@@ -56,7 +56,7 @@ void main() {
       final updateTodo = mockTodo.rebuild(
         (updates) => updates..title = 'updated title',
       );
-      final action = UpdateTodoAction(
+      final action = DoUpdateTodoAction(
         (updates) => updates.todo = updateTodo.toBuilder(),
       );
 

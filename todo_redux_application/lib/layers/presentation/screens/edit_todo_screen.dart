@@ -43,7 +43,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
   void _submitHandler(BuildContext context) {
     if (widget.args.type == EditTodoType.AddNew) {
       StoreProvider.of<TodoState>(context, listen: false)
-          .dispatch(AddNewTodoAction(
+          .dispatch(DoAddNewTodoAction(
         (updates) => updates
           ..todo = TodoEntity(
             (todo) => todo
@@ -56,7 +56,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
       ));
     } else if (widget.args.type == EditTodoType.Update) {
       StoreProvider.of<TodoState>(context, listen: false).dispatch(
-        UpdateTodoAction(
+        DoUpdateTodoAction(
           (updates) => updates
             ..todo = widget.args.todo
                 .rebuild(

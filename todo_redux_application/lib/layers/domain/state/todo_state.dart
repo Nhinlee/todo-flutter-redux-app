@@ -4,13 +4,11 @@ import 'package:todo_redux_application/entity/todo_entity.dart';
 
 part 'todo_state.g.dart';
 
-abstract class AbstractTodoState {
-  BuiltList<TodoEntity> get todoList;
-  bool get isLoading;
-}
 
 abstract class TodoState
-    implements Built<TodoState, TodoStateBuilder>, AbstractTodoState {
+    implements Built<TodoState, TodoStateBuilder> {
+  BuiltList<TodoEntity> get todoList;
+  bool get isLoading;
 
   TodoState._();
 

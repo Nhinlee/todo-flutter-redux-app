@@ -10,13 +10,13 @@ import 'package:todo_redux_application/layers/domain/state/todo_state.dart';
 
 class TodoRepositoryMock extends Mock implements AbstractTodoRepository {}
 
-class AppStoreMock extends Mock implements Store<AbstractTodoState> {
-  final AbstractTodoState todoState;
+class AppStoreMock extends Mock implements Store<TodoState> {
+  final TodoState todoState;
 
   AppStoreMock(this.todoState);
 
   @override
-  AbstractTodoState get state => todoState;
+  TodoState get state => todoState;
 }
 
 void main() {
@@ -27,7 +27,7 @@ void main() {
 
       test('local db don' 't have todo', () async {
         // GIVE
-        final action = LoadTodosAction();
+        final action = DoLoadTodosAction();
 
         // WHEN
         when(repository.getTodoList()).thenAnswer(
@@ -42,7 +42,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            LoadTodosSuccessAction(
+            SetLoadTodosSuccessAction(
               (updates) =>
                   updates..todoList = BuiltList<TodoEntity>([]).toBuilder(),
             ),
@@ -52,7 +52,7 @@ void main() {
 
       test('local db have todo', () async {
         // GIVE
-        final action = LoadTodosAction();
+        final action = DoLoadTodosAction();
         final mockTodoList = BuiltList<TodoEntity>([
           TodoEntity((updates) => updates
             ..id = 1
@@ -73,7 +73,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            LoadTodosSuccessAction(
+            SetLoadTodosSuccessAction(
               (updates) => updates
                 ..todoList = BuiltList<TodoEntity>(mockTodoList).toBuilder(),
             ),
@@ -95,7 +95,7 @@ void main() {
             ..title = 'test'
             ..isCompleted = false,
         );
-        final action = AddNewTodoAction(
+        final action = DoAddNewTodoAction(
           (updates) => updates..todo = mockTodo.toBuilder(),
         );
 
@@ -109,7 +109,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            AddNewTodoSuccessAction(),
+            SetAddNewTodoSuccessAction(),
           ],
         );
       });
@@ -122,7 +122,7 @@ void main() {
             ..title = 'test'
             ..isCompleted = false,
         );
-        final action = AddNewTodoAction(
+        final action = DoAddNewTodoAction(
           (updates) => updates..todo = mockTodo.toBuilder(),
         );
 
@@ -138,7 +138,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            AddNewTodoFailedAction(
+            SetAddNewTodoFailedAction(
                 (updates) => updates.todo = mockTodo.toBuilder()),
           ],
         );
@@ -159,7 +159,7 @@ void main() {
             ..title = 'test'
             ..isCompleted = false,
         );
-        final action = UpdateTodoAction(
+        final action = DoUpdateTodoAction(
           (updates) => updates..todo = mockTodo.toBuilder(),
         );
 
@@ -173,7 +173,7 @@ void main() {
         expect(
           await actual.toList(),
           [
-            UpdateTodoSuccessAction(),
+            SetUpdateTodoSuccessAction(),
           ],
         );
       });
@@ -186,12 +186,13 @@ void main() {
             ..title = 'test'
             ..isCompleted = false,
         );
-        final action = UpdateTodoAction(
+        final action = DoUpdateTodoAction(
           (updates) => updates..todo = mockTodo.toBuilder(),
         );
 
         // WHEN
-        when(repository.updateTodo(mockTodo)).thenAnswer((_) => throw Exception());
+        when(repository.updateTodo(mockTodo))
+            .thenAnswer((_) => throw Exception());
         Stream<dynamic> actual = middleware.updateTodoEpic(
           Stream.fromIterable([action]),
           null,
@@ -201,11 +202,10 @@ void main() {
         expect(
           await actual.toList(),
           [
-            UpdateTodoFailedAction(),
+            SetUpdateTodoFailedAction(),
           ],
         );
       });
-
     });
     //-----------------------------------------------------------
   });

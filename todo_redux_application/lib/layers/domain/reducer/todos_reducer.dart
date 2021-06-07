@@ -6,36 +6,36 @@ import 'package:todo_redux_application/entity/todo_entity.dart';
 import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
 
 final todosReducer = combineReducers<BuiltList<TodoEntity>>([
-  TypedReducer<BuiltList<TodoEntity>, LoadTodosSuccessAction>(_setLoadedTodo),
-  TypedReducer<BuiltList<TodoEntity>, LoadTodosFailedAction>(_setNoTodo),
-  TypedReducer<BuiltList<TodoEntity>, AddNewTodoAction>(_addNewTodo),
-  TypedReducer<BuiltList<TodoEntity>, AddNewTodoFailedAction>(
+  TypedReducer<BuiltList<TodoEntity>, SetLoadTodosSuccessAction>(_setLoadedTodo),
+  TypedReducer<BuiltList<TodoEntity>, SetLoadTodosFailedAction>(_setNoTodo),
+  TypedReducer<BuiltList<TodoEntity>, DoAddNewTodoAction>(_addNewTodo),
+  TypedReducer<BuiltList<TodoEntity>, SetAddNewTodoFailedAction>(
       _addNewTodoRollback),
-  TypedReducer<BuiltList<TodoEntity>, UpdateTodoAction>(_updateTodo),
+  TypedReducer<BuiltList<TodoEntity>, DoUpdateTodoAction>(_updateTodo),
 ]);
 
 BuiltList<TodoEntity> _setLoadedTodo(
-    BuiltList<TodoEntity> state, LoadTodosSuccessAction action) {
+    BuiltList<TodoEntity> state, SetLoadTodosSuccessAction action) {
   return action.todoList;
 }
 
 BuiltList<TodoEntity> _setNoTodo(
-    BuiltList<TodoEntity> state, LoadTodosFailedAction action) {
+    BuiltList<TodoEntity> state, SetLoadTodosFailedAction action) {
   return [].build();
 }
 
 BuiltList<TodoEntity> _addNewTodo(
-    BuiltList<TodoEntity> state, AddNewTodoAction action) {
+    BuiltList<TodoEntity> state, DoAddNewTodoAction action) {
   return state.rebuild((list) => list..add(action.todo));
 }
 
 BuiltList<TodoEntity> _addNewTodoRollback(
-    BuiltList<TodoEntity> state, AddNewTodoFailedAction action) {
+    BuiltList<TodoEntity> state, SetAddNewTodoFailedAction action) {
   return state.rebuild((list) => list..remove(action.todo));
 }
 
 BuiltList<TodoEntity> _updateTodo(
-    BuiltList<TodoEntity> state, UpdateTodoAction action) {
+    BuiltList<TodoEntity> state, DoUpdateTodoAction action) {
   final updateTodoIndex = state.indexWhere((todo) => todo.id == action.todo.id);
 
   final newState = state.rebuild(

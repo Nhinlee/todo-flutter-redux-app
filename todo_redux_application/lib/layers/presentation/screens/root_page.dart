@@ -31,7 +31,7 @@ class _RootPageState extends State<RootPage> {
 
     // Init
     StoreProvider.of<TodoState>(context, listen: false)
-        .dispatch(LoadTodosAction());
+        .dispatch(DoLoadTodosAction());
   }
 
   @override

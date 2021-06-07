@@ -4,16 +4,16 @@ import 'package:redux/redux.dart';
 import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
 
 final loadingReducer = combineReducers<bool>([
-  TypedReducer<bool, LoadTodosAction>(_setLoading),
-  TypedReducer<bool, LoadTodosSuccessAction>(_setLoaded),
+  TypedReducer<bool, DoLoadTodosAction>(_setLoading),
+  TypedReducer<bool, SetLoadTodosSuccessAction>(_setLoaded),
 ]);
 
-bool _setLoading(bool state, LoadTodosAction action ) {
+bool _setLoading(bool state, DoLoadTodosAction action ) {
   log('loading');
   return true;
 }
 
-bool _setLoaded(bool state, LoadTodosSuccessAction action) {
+bool _setLoaded(bool state, SetLoadTodosSuccessAction action) {
   log('loaded');
   return false;
 }
