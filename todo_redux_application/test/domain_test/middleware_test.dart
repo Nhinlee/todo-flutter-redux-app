@@ -24,50 +24,35 @@ void main() {
     group('Test load todos group', () {
       final repository = TodoRepositoryMock();
       final middleware = TodoMiddleware(repository: repository);
-      runTest({
-        Future<BuiltList<TodoEntity>> Function(Invocation) mockAnswer,
-        LoadTodosAction action,
-        List<dynamic> matcher,
-      }) async {
-        when(repository.getTodoList()).thenAnswer(mockAnswer);
-        Stream<dynamic> stream =
-            middleware.loadTodosEpic(Stream.fromIterable([action]), null);
-        expect(
-          await stream.toList(),
-          matcher,
-        );
-      }
 
-      test('value type - LoadTodosAction', () {
-        expect(
-          LoadTodosAction(),
-          LoadTodosAction(),
-        );
-      });
-
-      test('value type - LoadTodosSucessAction', () {
-        expect(
-          LoadTodosSuccessAction((updates) =>
-              updates..todoList = BuiltList<TodoEntity>().toBuilder()),
-          LoadTodosSuccessAction((updates) =>
-              updates..todoList = BuiltList<TodoEntity>().toBuilder()),
-        );
-      });
-
-      // Test
       test('local db don' 't have todo', () async {
-        await runTest(
-            action: LoadTodosAction(),
-            mockAnswer: (_) async {
-              return BuiltList<TodoEntity>([]);
-            },
-            matcher: [
-              LoadTodosSuccessAction((updates) =>
-                  updates..todoList = BuiltList<TodoEntity>([]).toBuilder()),
-            ]);
+        // GIVE
+        final action = LoadTodosAction();
+
+        // WHEN
+        when(repository.getTodoList()).thenAnswer(
+          (realInvocation) async => BuiltList<TodoEntity>(),
+        );
+        Stream<dynamic> actual = middleware.loadTodosEpic(
+          Stream.fromIterable([action]),
+          null,
+        );
+
+        // THEN
+        expect(
+          await actual.toList(),
+          [
+            LoadTodosSuccessAction(
+              (updates) =>
+                  updates..todoList = BuiltList<TodoEntity>([]).toBuilder(),
+            ),
+          ],
+        );
       });
 
       test('local db have todo', () async {
+        // GIVE
+        final action = LoadTodosAction();
         final mockTodoList = BuiltList<TodoEntity>([
           TodoEntity((updates) => updates
             ..id = 1
@@ -75,15 +60,25 @@ void main() {
             ..isCompleted = false)
         ]);
 
-        await runTest(
-            action: LoadTodosAction(),
-            mockAnswer: (_) async {
-              return BuiltList<TodoEntity>(mockTodoList);
-            },
-            matcher: [
-              LoadTodosSuccessAction(
-                  (updates) => updates.todoList = mockTodoList.toBuilder())
-            ]);
+        // WHEN
+        when(repository.getTodoList()).thenAnswer(
+          (realInvocation) async => BuiltList<TodoEntity>(mockTodoList),
+        );
+        Stream<dynamic> actual = middleware.loadTodosEpic(
+          Stream.fromIterable([action]),
+          null,
+        );
+
+        // THEN
+        expect(
+          await actual.toList(),
+          [
+            LoadTodosSuccessAction(
+              (updates) => updates
+                ..todoList = BuiltList<TodoEntity>(mockTodoList).toBuilder(),
+            ),
+          ],
+        );
       });
     });
     // ------------------------------------------------------
@@ -92,59 +87,59 @@ void main() {
       final repository = TodoRepositoryMock();
       final middleware = TodoMiddleware(repository: repository);
 
-      runTest({
-        AddNewTodoAction action,
-        Future<void> Function(Invocation) mockAnswer,
-        List<dynamic> matcher,
-      }) async {
-        // Mock answer
-        when(repository.addNewTodo(action.todo)).thenAnswer(mockAnswer);
-        // Actual stream
-        Stream<dynamic> stream = middleware.addNewTodoEpic(
-          Stream.fromIterable([action]),
-          null,
-        );
-        expect(await stream.toList(), matcher);
-      }
-
       test('add new todo success', () async {
+        // GIVE
         final mockTodo = TodoEntity(
           (updates) => updates
             ..id = 1
             ..title = 'test'
             ..isCompleted = false,
         );
+        final action = AddNewTodoAction(
+          (updates) => updates..todo = mockTodo.toBuilder(),
+        );
 
-        await runTest(
-          action: AddNewTodoAction(
-            (updates) => updates.todo = mockTodo.toBuilder(),
-          ),
-          mockAnswer: (_) async {
-            return;
-          },
-          matcher: [AddNewTodoSuccessAction()],
+        // WHEN
+        Stream<dynamic> actual = middleware.addNewTodoEpic(
+          Stream.fromIterable([action]),
+          null,
+        );
+
+        // THEN
+        expect(
+          await actual.toList(),
+          [
+            AddNewTodoSuccessAction(),
+          ],
         );
       });
 
       test('add new todo failed', () async {
+        // GIVE
         final mockTodo = TodoEntity(
           (updates) => updates
             ..id = 1
             ..title = 'test'
             ..isCompleted = false,
         );
+        final action = AddNewTodoAction(
+          (updates) => updates..todo = mockTodo.toBuilder(),
+        );
 
-        await runTest(
-          action: AddNewTodoAction(
-            (updates) => updates..todo = mockTodo.toBuilder(),
-          ),
-          mockAnswer: (_) async {
-            throw Exception();
-          },
-          matcher: [
+        // WHEN
+        when(repository.addNewTodo(mockTodo))
+            .thenAnswer((_) => throw Exception());
+        Stream<dynamic> actual = middleware.addNewTodoEpic(
+          Stream.fromIterable([action]),
+          null,
+        );
+
+        // THEN
+        expect(
+          await actual.toList(),
+          [
             AddNewTodoFailedAction(
-              (updates) => updates..todo = mockTodo.toBuilder(),
-            )
+                (updates) => updates.todo = mockTodo.toBuilder()),
           ],
         );
       });
@@ -155,56 +150,63 @@ void main() {
       // Prepare
       final repository = TodoRepositoryMock();
       final middleware = TodoMiddleware(repository: repository);
-      final mockTodo = TodoEntity(
-        (updates) => updates
-          ..id = 1
-          ..title = 'test'
-          ..isCompleted = false,
-      );
-      // Run Test Function
-      runTest({
-        UpdateTodoAction action,
-        Future<void> Function(Invocation) mockAnswer,
-        List<dynamic> matcher,
-      }) async {
-        // Mock answer
-        when(repository.updateTodo(action.todo)).thenAnswer(mockAnswer);
-        // Actual
-        Stream<dynamic> stream = middleware.updateTodoEpic(
+
+      test('update todo success', () async {
+        // GIVE
+        final mockTodo = TodoEntity(
+          (updates) => updates
+            ..id = 1
+            ..title = 'test'
+            ..isCompleted = false,
+        );
+        final action = UpdateTodoAction(
+          (updates) => updates..todo = mockTodo.toBuilder(),
+        );
+
+        // WHEN
+        Stream<dynamic> actual = middleware.updateTodoEpic(
           Stream.fromIterable([action]),
           null,
         );
-        // Test
-        expect(await stream.toList(), matcher);
-      }
 
-      test('Test Update Todo Success', () async {
-        await runTest(
-          action: UpdateTodoAction(
-            (updates) => updates..todo = mockTodo.toBuilder(),
-          ),
-          mockAnswer: (_) async {
-            return;
-          },
-          matcher: [
+        // THEN
+        expect(
+          await actual.toList(),
+          [
             UpdateTodoSuccessAction(),
           ],
         );
       });
 
-      test('Test Update Todo Failed', () async {
-        await runTest(
-          action: UpdateTodoAction(
-                (updates) => updates..todo = mockTodo.toBuilder(),
-          ),
-          mockAnswer: (_) async {
-            throw Exception();
-          },
-          matcher: [
+      test('update todo failed', () async {
+        // GIVE
+        final mockTodo = TodoEntity(
+          (updates) => updates
+            ..id = 1
+            ..title = 'test'
+            ..isCompleted = false,
+        );
+        final action = UpdateTodoAction(
+          (updates) => updates..todo = mockTodo.toBuilder(),
+        );
+
+        // WHEN
+        when(repository.updateTodo(mockTodo)).thenAnswer((_) => throw Exception());
+        Stream<dynamic> actual = middleware.updateTodoEpic(
+          Stream.fromIterable([action]),
+          null,
+        );
+
+        // THEN
+        expect(
+          await actual.toList(),
+          [
             UpdateTodoFailedAction(),
-          ]
+          ],
         );
       });
+
     });
+    //-----------------------------------------------------------
   });
 }

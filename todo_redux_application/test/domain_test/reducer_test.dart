@@ -9,38 +9,41 @@ import 'package:todo_redux_application/layers/domain/state/todo_state.dart';
 void main() {
   group('Test Todo Reducer', () {
     test('load todos', () {
-      // Setup
+      // GIVE
       final state = TodoState.initial();
       final store = Store<TodoState>(appReducer, initialState: state);
-      // Actions
       final action = LoadTodosAction();
-      // Dispatch
+
+      // WHEN
       store.dispatch(action);
-      // Test
+
+      // THEN
       expect(store.state.todoList, BuiltList<TodoEntity>([]));
     });
 
     test('create new todo', () {
-      // Setup
+      // GIVE
       final state = TodoState.initial();
       final store = Store<TodoState>(appReducer, initialState: state);
-      // Actions
       final mockTodo = TodoEntity(
         (updates) => updates
           ..id = 1
           ..title = 'test'
           ..isCompleted = false,
       );
-      final action =
-          AddNewTodoAction((updates) => updates.todo = mockTodo.toBuilder());
-      // Dispatch
+      final action = AddNewTodoAction(
+        (updates) => updates.todo = mockTodo.toBuilder(),
+      );
+
+      // WHEN
       store.dispatch(action);
-      // Test
+
+      // THEN
       expect(store.state.todoList, BuiltList<TodoEntity>([mockTodo]));
     });
 
     test('update todo', () {
-      // Setup
+      // GIVE
       TodoState state = TodoState.initial();
       final mockTodo = TodoEntity(
         (updates) => updates
@@ -50,14 +53,17 @@ void main() {
       );
       state = state.rebuild((updates) => updates..todoList.add(mockTodo));
       final store = Store<TodoState>(appReducer, initialState: state);
-      // Actions
-      final updateTodo =
-          mockTodo.rebuild((updates) => updates..title = 'updated title');
-      final action =
-          UpdateTodoAction((updates) => updates.todo = updateTodo.toBuilder());
-      // Dispatch
+      final updateTodo = mockTodo.rebuild(
+        (updates) => updates..title = 'updated title',
+      );
+      final action = UpdateTodoAction(
+        (updates) => updates.todo = updateTodo.toBuilder(),
+      );
+
+      // WHEN
       store.dispatch(action);
-      // Test
+
+      // THEN
       expect(store.state.todoList, BuiltList<TodoEntity>([updateTodo]));
     });
   });
