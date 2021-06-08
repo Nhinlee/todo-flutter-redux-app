@@ -1,5 +1,4 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:redux/redux.dart';
 import 'package:test/test.dart';
 import 'package:todo_redux_application/entity/todo_entity.dart';
 import 'package:todo_redux_application/layers/domain/actions/todo_action.dart';
@@ -10,61 +9,86 @@ void main() {
   group('Test Todo Reducer', () {
     test('load todos', () {
       // GIVE
-      final state = TodoState.initial();
-      final store = Store<TodoState>(appReducer, initialState: state);
+      final initialState = TodoState.initial();
+      final expectState = initialState.rebuild(
+        (updates) => updates..isLoading = true,
+      );
+
       final action = DoLoadTodoAction();
 
       // WHEN
-      store.dispatch(action);
+      final nextState = appReducer(initialState, action);
 
       // THEN
-      expect(store.state.todoList, BuiltList<TodoEntity>([]));
+      expect(expectState, nextState);
+    });
+
+    test('load todos success', () {
+      // GIVE
+      final initialState = TodoState.initial();
+      final expectState = initialState;
+
+      final action = SetLoadSuccessTodoAction();
+
+      // WHEN
+      final nextState = appReducer(initialState, action);
+
+      // THEN
+      expect(expectState, nextState);
     });
 
     test('create new todo', () {
       // GIVE
-      final state = TodoState.initial();
-      final store = Store<TodoState>(appReducer, initialState: state);
       final mockTodo = TodoEntity(
         (updates) => updates
           ..id = 1
           ..title = 'test'
           ..isCompleted = false,
       );
+      final initialState = TodoState.initial();
+      final expectState = initialState.rebuild(
+        (updates) => updates..todoList.add(mockTodo),
+      );
+
       final action = DoAddNewTodoAction(
         (updates) => updates.todo = mockTodo.toBuilder(),
       );
 
       // WHEN
-      store.dispatch(action);
+      final nextState = appReducer(initialState, action);
 
       // THEN
-      expect(store.state.todoList, BuiltList<TodoEntity>([mockTodo]));
+      expect(expectState, nextState);
     });
 
     test('update todo', () {
       // GIVE
-      TodoState state = TodoState.initial();
       final mockTodo = TodoEntity(
         (updates) => updates
           ..id = 1
           ..title = 'test'
           ..isCompleted = false,
       );
-      state = state.rebuild((updates) => updates..todoList.add(mockTodo));
-      final store = Store<TodoState>(appReducer, initialState: state);
-      final updateTodo = mockTodo.rebuild(
+      final updateMockTodo = mockTodo.rebuild(
         (updates) => updates..title = 'updated title',
       );
+
+      final initialState = TodoState.initial().rebuild(
+        (updates) => updates..todoList.add(mockTodo),
+      );
+      final expectState = initialState.rebuild(
+        (updates) => updates..todoList = ListBuilder([updateMockTodo]),
+      );
+
       final action = DoUpdateTodoAction(
-        (updates) => updates.todo = updateTodo.toBuilder(),
+        (updates) => updates.todo = updateMockTodo.toBuilder(),
       );
 
       // WHEN
-      store.dispatch(action);
+      final nextState = appReducer(initialState, action);
 
       // THEN
-      expect(store.state.todoList, BuiltList<TodoEntity>([updateTodo]));
+      expect(expectState, nextState);
     });
   });
 }
